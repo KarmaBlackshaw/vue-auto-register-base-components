@@ -4,7 +4,12 @@ Usage:
 
 import baseComponents from '@/plugins/baseComponents'
 
-app.use(baseComponents)
+app.use(baseComponents, options)
+
+Options:
+- path     {String}      // The relative path of the components folder
+- deep     {Boolean}     // Whether or not to look in subfolders
+- regex    {Regex}       // The regular expression used to match base component filenames
 
  */
 
@@ -18,11 +23,8 @@ const pipe = (initial, fns) => fns.reduce((v, f) => f(v), initial)
 export default {
   install: (app, ops = {}) => {
     const options = Object.assign({
-      // The relative path of the components folder
       path: '../components',
-      // Whether or not to look in subfolders
       deep: true,
-      // The regular expression used to match base component filenames
       regex: /Base[A-Z]\w+\.(vue|js)$/
     }, ops)
 
