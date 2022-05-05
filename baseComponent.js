@@ -16,17 +16,17 @@ import camelCase from 'lodash/camelCase'
 const pipe = (initial, fns) => fns.reduce((v, f) => f(v), initial)
 
 export default {
-  install: app => {
-    const requireComponent = require.context(
+  install: (app, ops = {}) => {
+    const options = Object.assign({
       // The relative path of the components folder
-      '../components',
-
+      path: '../components',
       // Whether or not to look in subfolders
-      true,
-
+      deep: true,
       // The regular expression used to match base component filenames
-      /Base[A-Z]\w+\.(vue|js)$/
-    )
+      regex: /Base[A-Z]\w+\.(vue|js)$/
+    }, ops)
+
+    const requireComponent = require.context(options.path, options.deep, options.regex)
 
     requireComponent.keys().forEach(fileName => {
       // Get component config
