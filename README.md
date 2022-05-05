@@ -1,4 +1,4 @@
-###  A simple plugin which imports `BaseComponents`.
+###  A simple `Vue` plugin which imports `BaseComponents`.
 
 Usage:
 ```js
